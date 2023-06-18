@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 namespace Controls
 {
 
-    public class PlayerMover : MonoBehaviour
+    public class PlayerMoveController : MonoBehaviour
     {
         [SerializeField] private InputActionProperty _walkAction;
         [SerializeField] private InputActionProperty _dashAction;

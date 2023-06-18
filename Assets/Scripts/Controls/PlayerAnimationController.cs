@@ -1,19 +1,14 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Controls
 {
 
-    public class PlayerAnimator : MonoBehaviour
+    public class PlayerAnimationController : MonoBehaviour
     {
         private const float NearZeroFloat = 0.001f;
-        
-        [SerializeField] private string _idleAnimation;
-        [SerializeField] private string _walkAnimation;
-        [SerializeField] private string _jumpAnimation;
-        [SerializeField] private string _fallAnimation;
-        [SerializeField] private string _landAnimation;
-        
+
         [Header("Parameters")]
         [SerializeField] private string _speedParameter;
         [SerializeField] private string _verticalSpeedParameter;
