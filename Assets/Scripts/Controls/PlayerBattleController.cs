@@ -53,7 +53,7 @@ namespace Controls
         
         private async void ResetAttackTargetCollider()
         {
-            await Task.Delay(100);
+            await Task.Delay(500);
             _attackTargetCollider.enabled = false;
         }
     }

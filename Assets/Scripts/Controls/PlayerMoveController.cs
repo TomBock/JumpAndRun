@@ -90,6 +90,8 @@ namespace Controls
 
         private void OnDash(InputAction.CallbackContext obj)
         {
+            if (_dashing)
+                return;
             ResetToNormalSpeed(_walkSpeed);
             _currentSpeed = _dashSpeed;
             _dashing = true;
