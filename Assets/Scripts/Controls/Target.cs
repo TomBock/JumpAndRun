@@ -9,15 +9,24 @@ namespace Controls
 
     public class Target : MonoBehaviour
     {
-        public static void SpawnOnMap()
+        public static void SpawnRandomlyOnMap()
         {
             var meshFilters = FindObjectsOfType <MeshFilter>();
-
+            var loadedPrefab = Resources.Load<GameObject>("Prefabs/ExampleTarget");
+           
             foreach (var meshFilter in meshFilters)
             {
                 var point = Utils.GetRandomPointOnMesh(meshFilter.sharedMesh);
-                var loadedPrefab = Resources.Load<GameObject>("Prefabs/ExampleTarget");
                 var target = Instantiate(loadedPrefab, meshFilter.transform.position + point + Vector3.up * .5f, Quaternion.identity);
+            }
+        }
+
+        public static void SpawnOnMap()
+        {
+            var loadedPrefab = Resources.Load<GameObject>("Prefabs/ExampleTarget");
+            foreach (var targetSpawn in FindObjectsOfType<TargetSpawn>())
+            {
+                var target = Instantiate(loadedPrefab, targetSpawn.transform.position, Quaternion.identity);
             }
         }
 
@@ -44,6 +53,7 @@ namespace Controls
             if (collision.collider.gameObject.CompareTag("PlayerAttack"))
             {
                 PlayerData.points++;
+                AudioPlayer.Instance.PlayTargetHit(this);
                 Destroy(gameObject);
             }
         }

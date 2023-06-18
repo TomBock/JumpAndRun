@@ -18,6 +18,8 @@ namespace Controls
         [SerializeField] private float _jumpCount = 2;
         [SerializeField] private float _jumpButtonMaxTime = 0.3f;
         
+        [SerializeField] private int _dashCount = 1;
+        
         private float _currentSpeed;
         private Vector3 _direction;
         
@@ -25,6 +27,7 @@ namespace Controls
         private short _jumpsUsed;
         private bool _jumping;
 
+        private short _dashesUsed;
         private bool _dashing;
         
         private Rigidbody _rigidbody;
@@ -57,6 +60,10 @@ namespace Controls
         private void FixedUpdate()
         {
             var velocity = _direction * _currentSpeed * Time.deltaTime;
+            
+            // Dashing Reset
+            if (!_dashing && PlayerData.isGrounded)
+                _dashesUsed = 0;
             
             // Jumping
             if (_jumping)
@@ -92,9 +99,14 @@ namespace Controls
         {
             if (_dashing)
                 return;
+
+            if (_dashesUsed == _dashCount && !PlayerData.isGrounded)
+                return;
+
             ResetToNormalSpeed(_walkSpeed);
             _currentSpeed = _dashSpeed;
             _dashing = true;
+            _dashesUsed++;
         }
         
         private async void ResetToNormalSpeed(float originalSpeed)

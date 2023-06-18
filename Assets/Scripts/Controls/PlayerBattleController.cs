@@ -17,6 +17,7 @@ namespace Controls
         [SerializeField] private string _attack3Animation;
 
         [SerializeField] private Collider _attackTargetCollider;
+        [SerializeField] private AudioSource _audioSource;
 
         private Animator _animator;
 
@@ -49,6 +50,7 @@ namespace Controls
             _animator.Play(animationName);
             _attackTargetCollider.enabled = true;
             ResetAttackTargetCollider();
+            _audioSource.Play();
         }
         
         private async void ResetAttackTargetCollider()
